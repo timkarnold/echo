@@ -1,0 +1,5 @@
+npm-debug.log
+.idea
+.DS_Store
+node_modules
+lib/gryd-scaffold

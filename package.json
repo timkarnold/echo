@@ -1,0 +1,25 @@
+{
+  "name": "gryd-scaffold",
+  "version": "0.3.0",
+  "description": "Simple REST API starter project",
+  "keywords": [
+    "gryd",
+    "REST",
+    "API",
+    "express",
+    "framework",
+    "mongoose",
+    "mean",
+    "bunyan"
+  ],
+  "main": "index.js",
+  "author": "Aaron Blankenship",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ablankenship10/gryd-scaffold.git"
+  },
+  "dependencies": {
+    "gryd": "^0.3.0"
+  }
+}

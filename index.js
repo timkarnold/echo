@@ -1,0 +1,1 @@
+require('gryd')(__dirname + '/apps');
