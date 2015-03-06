@@ -20,6 +20,7 @@
     "url": "https://github.com/ablankenship10/gryd-scaffold.git"
   },
   "dependencies": {
-    "gryd": "^0.3.0"
+    "gryd": "^0.3.0",
+    "lodash": "^3.4.0"
   }
 }

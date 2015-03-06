@@ -8,5 +8,5 @@ var Echo = module.exports = function (data) {
 };
 
 Echo.prototype.hello = function (req, res) {
-  res.send('Hello World')
+  res.send('Hello World 2')
 };
