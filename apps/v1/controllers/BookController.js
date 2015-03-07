@@ -8,5 +8,18 @@ var Echo = module.exports = function (data) {
 };
 
 Echo.prototype.hello = function (req, res) {
-  res.send('Hello World 2')
+  var response = {
+    "version": "string",
+    "sessionAttributes": {
+      "string": "1.0"
+    },
+    "response": {
+      "outputSpeech": {
+        "type": "string",
+        "text": "Hello there"
+      },
+      "shouldEndSession": true
+    }
+  };
+  res.json(response);
 };
