@@ -9,14 +9,11 @@ var Echo = module.exports = function (data) {
 
 Echo.prototype.hello = function (req, res) {
   var response = {
-    "version": "string",
-    "sessionAttributes": {
-      "string": "1.0"
-    },
+    "version": "1.0",
     "response": {
       "outputSpeech": {
-        "type": "string",
-        "text": "Hello there"
+        "type": "PlainText",
+        "text": "Greetings, from node!"
       },
       "shouldEndSession": true
     }
