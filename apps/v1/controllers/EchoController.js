@@ -72,7 +72,7 @@ Echo.prototype.helloWorld = function (req, res) {
         pretext: text,
         color: "#D00000",
         fields: [{
-          title: body.request.intent.name,
+          title: "Test",
           value: "Posted by Amazon Echo",
           short: false
         }]
@@ -80,11 +80,7 @@ Echo.prototype.helloWorld = function (req, res) {
     }
   };
 
-  request.post(opts, function (err, resp, body) {
-    if (err) {
-      data.log.warn({SlackError: "Unable to post log to slack", error: err});
-    }
-  });
+  request.post(opts, function (err, resp, body) {});
 
 
   var response = {
