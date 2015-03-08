@@ -36,7 +36,7 @@ Intents JSON
                     "type":"LITERAL"
                 }
             ]
-        },
+        }
     ]
 }
 ```

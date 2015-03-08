@@ -94,7 +94,6 @@ Echo.prototype.postToSlack = function (req, res) {
 Echo.prototype.getNextEpisode = function (req, res) {
   var self = this;
   var body = req.body;
-  var channel;
 
   if (!body.request.intent.slots.hasOwnProperty('show')) {
     self.outputSpeech("Sorry, I didn't hear what show you were looking for", res);
