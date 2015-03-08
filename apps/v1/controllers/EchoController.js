@@ -1,6 +1,7 @@
 var _ = require('lodash');
 var request = require('request');
 var TVRage = require("tvragejson");
+var distance = require('google-distance');
 var Echo = module.exports = function (data) {
   _.extend(this, data);
 
@@ -32,6 +33,9 @@ Echo.prototype.request = function (req, res) {
         case "getNextEpisode":
           self.getNextEpisode(req,res);
           break;
+        case "commuteTime":
+          self.commuteTime(req,res);
+          break;
       }
     } else {
       // unsupported request type
@@ -49,6 +53,22 @@ Echo.prototype.failed = function (req, res) {
 Echo.prototype.launch = function (req, res) {
   var self = this;
   self.outputSpeech('Echobot at your service.', res);
+};
+
+Echo.prototype.commuteTime = function (req, res) {
+  var self = this;
+  distance.get(
+    {
+      origin: 'Oviedo FL, 32765',
+      destination: '101 S. Garland Ave, Orlando FL 32801'
+    },
+    function(err, data) {
+      if (err){
+        self.console.log(err);
+        self.outputSpeech("Sorry, I couldn't get a commute time estimate right now", res);
+      }
+      self.outputSpeech("You're looking at a "+data.duration+" commute.", res);
+    });
 };
 
 Echo.prototype.helloWorld = function (req, res) {

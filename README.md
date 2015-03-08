@@ -36,6 +36,10 @@ Intents JSON
                     "type":"LITERAL"
                 }
             ]
+        },
+        {
+            "intent":"commuteTime",
+            "slots":[]
         }
     ]
 }
@@ -52,6 +56,11 @@ postToSlack     send to slack channel {random|channel}, {hello|message}
 getNextEpisode  when is the next episode of {big bang theory|show}
 getNextEpisode  when is the next episode of {walking dead|show}
 getNextEpisode  when is the next episode of {top gear|show}
+commuteTime     what is my commute like today
+commuteTime     what is my commute like this morning
+commuteTime     how long will it take to get to work
+commuteTime     how long is my commute today
+commuteTime     how long is my commute this morning
 ```
 
 Contributors
