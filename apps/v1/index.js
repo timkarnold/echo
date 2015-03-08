@@ -1,3 +1,5 @@
+var bodyParser = require('body-parser');
+
 module.exports = function (data) {
   /*
     This code is ran in clustered processes and is
@@ -13,18 +15,20 @@ module.exports = function (data) {
     data.log: Bunyan logger
     data.db: Mongoose db connection
     data.config: Application configuration
-   */
-  /*
-  data.app.use(function(req, res, nex){
+*/
+  data.app.use(bodyParser.urlencoded({ extended: true }));
+  data.app.use(bodyParser.json({limit: '10mb'}));
+
+  data.app.use(function(req, res, next){
     var str = req.method + " " + req.headers['x-forwarded-for'];
     str += " " + req.hostname + req.originalUrl;
     data.log.info(str);
-    data.log.info(req.body)
+    data.log.info(req.body);
+    next();
   });
-  */
 };
 
-/*
+
 function getClientIp(req) {
   var ipAddress;
   var forwardedIpsStr = req.header('x-forwarded-for');
@@ -34,4 +38,3 @@ function getClientIp(req) {
     ipAddress = req.connection.remoteAddress;
   return ipAddress;
 }
-  */
