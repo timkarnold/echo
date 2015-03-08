@@ -61,7 +61,7 @@ Echo.prototype.postToSlack = function (req, res) {
   } else if (!body.request.intent.slots.message.value) {
     self.outputSpeech("Sorry, I didn't catch what your message was", res);
   } else {
-    if (body.request.intent.slots.hasOwnProperty('channel') && body.request.intent.slots.channel.hasOwnProperty('value') {
+    if (body.request.intent.slots.hasOwnProperty('channel') && body.request.intent.slots.channel.hasOwnProperty('value')) {
       channel = body.request.intent.slots.channel.value;
     } else {
       channel = "random";
