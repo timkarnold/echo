@@ -106,7 +106,9 @@ Echo.prototype.getNextEpisode = function (req, res) {
         self.log.info(err);
         self.outputSpeech("Sorry, I seem to be having issues finding that show", res);
       } else {
+        self.outputSpeech("That show's ID is "+searchResponse["Results"]["show"][0]["showid"], res);
         self.info.log(searchResponse);
+        /*
         // Get information for a particular show
         TVRage.search(searchResponse["Results"]["show"][0]["showid"], function(err, listingResponse) {
           if (err) {
@@ -117,6 +119,7 @@ Echo.prototype.getNextEpisode = function (req, res) {
             self.outputSpeech("I should be able to tell you that soon!", res);
           }
         });
+        */
       }
     });
   }
