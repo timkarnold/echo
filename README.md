@@ -7,9 +7,25 @@ Intents JSON
 {
     "intents":[
         {
-            "intent":"HelloWorld",
+            "intent":"helloWorld",
             "slots":[
-                {"name":"Greeting", "type":"LITERAL"}
+                {
+                    "name":"greeting",
+                    "type":"LITERAL"
+                }
+            ]
+        },
+        {
+            "intent": "postToSlack",
+            "slots": [
+                {
+                    "name": "message",
+                    "type": "LITERAL"
+                },
+                {
+                    "name": "channel",
+                    "type": "LITERAL"
+                }
             ]
         }
     ]
@@ -19,7 +35,12 @@ Intents JSON
 Sample Utterances
 ----
 ```
-HelloWorld      hello {there|Greeting}
+helloWorld      hello {there|greeting}
+postToSlack     post to slack {hi|message}
+postToSlack     post in slack channel {general|channel}, {greetings|message}
+postToSlack     send to slack {test|message}
+postToSlack     send to slack channel {random|channel}, {hello|message}
+
 ```
 
 Contributors
