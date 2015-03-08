@@ -68,16 +68,7 @@ Echo.prototype.helloWorld = function (req, res) {
     url: "https://hooks.slack.com/services/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",
     json: {
       username: "Echo",
-      attachments: [{
-        fallback: text,
-        pretext: text,
-        color: "#D00000",
-        fields: [{
-          title: "Test",
-          value: "Posted by Amazon Echo",
-          short: false
-        }]
-      }]
+      text: "Hello world!"
     }
   };
 
