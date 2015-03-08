@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var request = require('request');
 var Echo = module.exports = function (data) {
   _.extend(this, data);
 
