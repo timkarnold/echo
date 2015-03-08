@@ -53,6 +53,7 @@ Echo.prototype.helloWorld = function (req, res) {
 };
 
 Echo.prototype.postToSlack = function (req, res) {
+  var self = this;
   var body = req.body;
   var channel;
 
