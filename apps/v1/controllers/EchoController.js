@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var request = require('request');
+var TVRage = require("tvragejson");
 var Echo = module.exports = function (data) {
   _.extend(this, data);
 
@@ -27,6 +28,9 @@ Echo.prototype.request = function (req, res) {
           break;
         case "postToSlack":
           self.postToSlack(req,res);
+          break;
+        case "getNextEpisode":
+          self.getNextEpisode(req,res);
           break;
       }
     } else {
@@ -86,6 +90,39 @@ Echo.prototype.postToSlack = function (req, res) {
     });
   }
 };
+
+Echo.prototype.getNextEpisode = function (req, res) {
+  var self = this;
+  var body = req.body;
+  var channel;
+
+  if (!body.request.intent.slots.hasOwnProperty('show')) {
+    self.outputSpeech("Sorry, I didn't hear what show you were looking for", res);
+  } else if (!body.request.intent.slots.show.value) {
+    self.outputSpeech("Sorry, I didn't catch what show you are looking for.", res);
+  } else {
+    // Search for a show by name
+    TVRage.search(body.request.intent.slots.show.value, function(err, searchResponse) {
+      if (err) {
+        self.log.info(err);
+        self.outputSpeech("Sorry, I seem to be having issues finding that show", res);
+      } else {
+        self.info.log(searchResponse);
+        // Get information for a particular show
+        TVRage.search(searchResponse["Results"]["show"][0]["showid"], function(err, listingResponse) {
+          if (err) {
+            self.log.info(err);
+            self.outputSpeech("Sorry, I seem to be having issues finding the next episode of show", res);
+          } else {
+            self.info.log(listingResponse);
+            self.outputSpeech("I should be able to tell you that soon!", res);
+          }
+        });
+      }
+    });
+  }
+};
+
 
 Echo.prototype.outputSpeech = function(text, res){
   var response = {

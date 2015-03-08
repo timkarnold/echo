@@ -27,7 +27,16 @@ Intents JSON
                     "type": "LITERAL"
                 }
             ]
-        }
+        },
+        {
+            "intent":"getNextEpisode",
+            "slots":[
+                {
+                    "name":"show",
+                    "type":"LITERAL"
+                }
+            ]
+        },
     ]
 }
 ```
@@ -40,7 +49,9 @@ postToSlack     post to slack {hi|message}
 postToSlack     post in slack channel {general|channel}, {greetings|message}
 postToSlack     send to slack {test|message}
 postToSlack     send to slack channel {random|channel}, {hello|message}
-
+getNextEpisode  when is the next episode of {big bang theory|show}
+getNextEpisode  when is the next episode of {walking dead|show}
+getNextEpisode  when is the next episode of {top gear|show}
 ```
 
 Contributors
