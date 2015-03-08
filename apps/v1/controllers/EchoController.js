@@ -22,8 +22,11 @@ Echo.prototype.request = function (req, res) {
     } else if (body.request.type === "IntentRequest") {
       // user made request
       switch (body.request.intent.name) {
-        case "HelloWorld":
+        case "helloWorld":
           self.helloWorld(req,res);
+          break;
+        case "postToSlack":
+          self.postToSlack(req,res);
           break;
       }
     } else {
@@ -35,52 +38,61 @@ Echo.prototype.request = function (req, res) {
 };
 
 Echo.prototype.failed = function (req, res) {
-  var response = {
-    "version": "1.0",
-    "response": {
-      "outputSpeech": {
-        "type": "PlainText",
-        "text": "Sorry, your request could not be processed."
-      },
-      "shouldEndSession": true
-    }
-  };
-  res.json(response);
+  var self = this;
+  self.outputSpeech('Sorry, your request could not be processed.', res);
 };
 
 Echo.prototype.launch = function (req, res) {
-  var response = {
-    "version": "1.0",
-    "response": {
-      "outputSpeech": {
-        "type": "PlainText",
-        "text": "Greetings, from node!"
-      },
-      "shouldEndSession": false
-    }
-  };
-  res.json(response);
+  var self = this;
+  self.outputSpeech('Echobot at your service.', res);
 };
 
 Echo.prototype.helloWorld = function (req, res) {
+  var self = this;
+  self.outputSpeech('Hi there.', res);
+};
+
+Echo.prototype.postToSlack = function (req, res) {
   var body = req.body;
-  var opts = {
-    url: "https://hooks.slack.com/services/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",
-    json: {
-      username: "Echo",
-      text: "Hello world!"
+  var channel;
+
+  if (!body.request.intent.slots.hasOwnProperty('message')) {
+    self.outputSpeech("Sorry, I didn't hear a message to post", res);
+  } else if (!body.request.intent.slots.message.value) {
+    self.outputSpeech("Sorry, I didn't catch what your message was", res);
+  } else {
+    if (body.request.intent.slots.hasOwnProperty('channel') && body.request.intent.slots.channel.hasOwnProperty('value') {
+      channel = body.request.intent.slots.channel.value;
+    } else {
+      channel = "random";
     }
-  };
+    var opts = {
+      url: "https://hooks.slack.com/services/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",
+      json: {
+        username: "Echo",
+        channel: '#'+channel,
+        text: body.request.intent.slots.message.value
+      }
+    };
 
-  request.post(opts, function (err, resp, body) {});
+    request.post(opts, function (err, resp, body) {
+      if (err) {
+        self.log.info('Slack Posting Error', err);
+        self.outputSpeech("Sorry, there was a problem sending your message.", res);
+      } else {
+        self.outputSpeech("Message sent!", res);
+      }
+    });
+  }
+};
 
-
+Echo.prototype.outputSpeech = function(text, res){
   var response = {
     "version": "1.0",
     "response": {
       "outputSpeech": {
         "type": "PlainText",
-        "text": "Hello World!"
+        "text": text
       },
       "shouldEndSession": false
     }
