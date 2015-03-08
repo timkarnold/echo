@@ -62,6 +62,31 @@ Echo.prototype.launch = function (req, res) {
 };
 
 Echo.prototype.helloWorld = function (req, res) {
+  var body = req.body;
+  var opts = {
+    url: data.config.slackHook,
+    json: {
+      username: "Echo",
+      attachments: [{
+        fallback: text,
+        pretext: text,
+        color: "#D00000",
+        fields: [{
+          title: body.request.intent.name,
+          value: "Posted by Amazon Echo",
+          short: false
+        }]
+      }]
+    }
+  };
+
+  request.post(opts, function (err, resp, body) {
+    if (err) {
+      data.log.warn({SlackError: "Unable to post log to slack", error: err});
+    }
+  });
+
+
   var response = {
     "version": "1.0",
     "response": {
