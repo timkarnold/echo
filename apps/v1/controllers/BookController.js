@@ -4,7 +4,7 @@ var Echo = module.exports = function (data) {
 
 
   //define express routes
-  this.app.get("/", this.hello.bind(this));
+  this.app.post("/", this.hello.bind(this));
 };
 
 Echo.prototype.hello = function (req, res) {
