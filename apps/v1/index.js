@@ -14,14 +14,17 @@ module.exports = function (data) {
     data.db: Mongoose db connection
     data.config: Application configuration
    */
+  /*
   data.app.use(function(req, res, nex){
     var str = req.method + " " + req.headers['x-forwarded-for'];
     str += " " + req.hostname + req.originalUrl;
     data.log.info(str);
     data.log.info(req.body)
   });
+  */
 };
 
+/*
 function getClientIp(req) {
   var ipAddress;
   var forwardedIpsStr = req.header('x-forwarded-for');
@@ -31,3 +34,4 @@ function getClientIp(req) {
     ipAddress = req.connection.remoteAddress;
   return ipAddress;
 }
+  */
