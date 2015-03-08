@@ -64,7 +64,7 @@ Echo.prototype.launch = function (req, res) {
 Echo.prototype.helloWorld = function (req, res) {
   var body = req.body;
   var opts = {
-    url: data.config.slackHook,
+    url: "https://hooks.slack.com/services/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",
     json: {
       username: "Echo",
       attachments: [{
