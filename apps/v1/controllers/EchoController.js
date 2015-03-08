@@ -1,25 +1,26 @@
 var _ = require('lodash');
 var Echo = module.exports = function (data) {
   _.extend(this, data);
-  
+
   //define express routes
   this.app.post("/", this.request.bind(this));
 };
 
 Echo.prototype.request = function (req, res) {
   var self = this;
+  var body = req.body;
   self.log.info(req);
 
-  if (!req.hasOwnProperty("request") || !req.request.hasOwnProperty("type")) {
+  if (!body.hasOwnProperty("request") || !body.request.hasOwnProperty("type")) {
     // request failed validation
     self.failed(req, res);
   } else {
-    if (req.request.type === "LaunchRequest") {
+    if (body.request.type === "LaunchRequest") {
       // user opened app
       self.launch(req, res);
-    } else if (req.request.type === "IntentRequest") {
+    } else if (body.request.type === "IntentRequest") {
       // user made request
-      switch (req.request.intent.name) {
+      switch (body.request.intent.name) {
         case "HelloWorld":
           self.helloWorld(req,res);
           break;
